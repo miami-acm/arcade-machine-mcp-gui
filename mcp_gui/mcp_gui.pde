@@ -172,6 +172,7 @@ void loadGames() {
 void loadAnyKey() {
 	anyKey = new HashSet<Character>();
 
+	// Player 1's buttons
 	anyKey.add('R');
 	anyKey.add('T');
 	anyKey.add('Y');
@@ -179,12 +180,19 @@ void loadAnyKey() {
 	anyKey.add('G');
 	anyKey.add('H');
 
+	// Player 2's buttons
 	anyKey.add('U');
 	anyKey.add('I');
 	anyKey.add('O');
 	anyKey.add('J');
 	anyKey.add('K');
 	anyKey.add('L');
+
+	// Player 1 start button
+	anyKey.add(' ');
+
+	// Player 2 start button
+	anyKey.add(ENTER);
 
 	anyKeyLoaded = true;
 }
