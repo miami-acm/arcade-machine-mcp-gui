@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = 'mcp.McpGui'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Arcade Machine MCP GUI',
+                   'Main-Class': 'mcp.McpGui'
+    }
+}
+
+dependencies {
+    compile group: 'org.processing', name: 'core', version: '2.2.1'
+    runtime group: 'org.processing', name: 'core', version: '2.2.1'
+}
