@@ -10,6 +10,7 @@ public class Game {
 	}
 
 	public void run() {
-
+		println("Running game " + name);
+		exit();
 	}
 }
