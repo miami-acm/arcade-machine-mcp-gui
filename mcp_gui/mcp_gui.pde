@@ -4,8 +4,10 @@ final int GAMES_PER_PAGE = 5;
 final color HIGHLIGHT_COLOR = color(0, 0, 255);
 
 final int BAR_WIDTH = 600;
-
 final int BAR_HEIGHT = 45;
+
+final int IMAGE_WIDTH = 300;
+final int IMAGE_HEIGHT = 300;
 
 PFont bitFont;
 
@@ -38,6 +40,7 @@ void setup() {
 	textFont(bitFont);
 	textAlign(CENTER, CENTER);
 	rectMode(CENTER);
+	imageMode(CENTER);
 }
 
 void draw() {
@@ -76,6 +79,12 @@ public int sketchHeight() {
  * HIGHLIGHT_COLOR.
  */
 void drawMenu() {
+	fill(HIGHLIGHT_COLOR);
+	rect(width/2, 200, IMAGE_WIDTH+10, IMAGE_HEIGHT+10);
+
+	Game selectedGame = games.get(selection * page);
+	image(selectedGame.image, width/2, 200, IMAGE_WIDTH, IMAGE_HEIGHT);
+
 	int hPos = width / 2;
 	int vPos = 500 + selection * 100;
 
