@@ -8,4 +8,8 @@ public class Game {
 		this.path = path;
 		this.image = loadImage(imagePath);
 	}
+
+	public void run() {
+
+	}
 }

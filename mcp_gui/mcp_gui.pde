@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 final int GAMES_PER_PAGE = 5;
 
 // Color of the bar used to highlight the selected game
@@ -12,11 +14,17 @@ final int IMAGE_HEIGHT = 300;
 PFont bitFont;
 
 ArrayList<Game> games;
+HashSet<Character> anyKey;
 
 // This will be updated by the `loadGames` method after it executes. Since
 // `loadGames` runs asynchronously, this will indicate to the main thread that
 // it is safe to use the `games` ArrayList.
 boolean gamesLoaded = false;
+
+// This will be updated by the `loadAnyKey` method after it executes. Since
+// `loadAnyKey` runs asynchronously, this will indicate to the main thread that
+// it is safe to use the `anyKey` HashSet.
+boolean anyKeyLoaded = false;
 
 // The current page being displayed (1-indexed, not 0-indexed)
 int page = 1;
@@ -33,6 +41,8 @@ MenuState state = MenuState.LOADING;
 
 void setup() {
 	thread("loadGames");
+	thread("loadAnyKey");
+
 	noCursor();
 	background(0, 0, 0);
 
@@ -49,7 +59,7 @@ void draw() {
 		case LOADING:
 			text("LOADING...", width/2, height/2);
 
-			if (gamesLoaded) {
+			if (gamesLoaded && anyKeyLoaded) {
 				state = MenuState.IN_MENU;
 			}
 			break;
@@ -126,6 +136,9 @@ void keyPressed() {
 		if (selection < GAMES_PER_PAGE - 1) {
 			selection++;
 		}
+	} else if (anyKey.contains(key)) {
+		Game selectedGame = games.get(selection * page);
+		selectedGame.run();
 	}
 }
 
@@ -154,4 +167,24 @@ void loadGames() {
 	maxPage = games.size() / GAMES_PER_PAGE + 1;
 
 	gamesLoaded = true;
+}
+
+void loadAnyKey() {
+	anyKey = new HashSet<Character>();
+
+	anyKey.add('R');
+	anyKey.add('T');
+	anyKey.add('Y');
+	anyKey.add('F');
+	anyKey.add('G');
+	anyKey.add('H');
+
+	anyKey.add('U');
+	anyKey.add('I');
+	anyKey.add('O');
+	anyKey.add('J');
+	anyKey.add('K');
+	anyKey.add('L');
+
+	anyKeyLoaded = true;
 }
