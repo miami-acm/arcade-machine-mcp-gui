@@ -18,3 +18,7 @@ dependencies {
     compile group: 'org.processing', name: 'core', version: '2.2.1'
     runtime group: 'org.processing', name: 'core', version: '2.2.1'
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
