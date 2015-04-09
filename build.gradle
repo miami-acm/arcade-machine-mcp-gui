@@ -17,6 +17,9 @@ jar {
 dependencies {
     compile group: 'org.processing', name: 'core', version: '2.2.1'
     runtime group: 'org.processing', name: 'core', version: '2.2.1'
+
+	compile group: 'uk.co.caprica', name: 'juds', version: '0.94.1'
+	runtime group: 'uk.co.caprica', name: 'juds', version: '0.94.1'
 }
 
 task wrapper(type: Wrapper) {
