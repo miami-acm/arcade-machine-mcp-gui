@@ -4,7 +4,7 @@ import com.etsy.net.UnixDomainSocketClient;
 public class McpProxy {
 	UnixDomainSocketClient client;
 
-	public UnixDomainSocketClient(String fd) {
+	public McpProxy(String fd) {
 
 	}
 }
