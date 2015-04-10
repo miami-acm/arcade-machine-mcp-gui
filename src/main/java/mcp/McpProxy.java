@@ -1,7 +1,8 @@
+package mcp;
+
 import com.etsy.net.JUDS;
 import com.etsy.net.UnixDomainSocketClient;
 import java.io.*;
-import mcp.Game;
 
 public class McpProxy {
 	UnixDomainSocketClient client;
@@ -11,7 +12,7 @@ public class McpProxy {
 	static final String GET_GAMES = "GET GAMES";
 	static final String NUM_GAMES = "NUM GAMES";
 	static final String DONE_GAMES = "DONE GAMES";
-	static final Sring DEFAULT_LOCATION = "/tmp/mcp";
+	static final String DEFAULT_LOCATION = "/tmp/mcp";
 
 	/**
 	 * Construct a new McpProxy object that listens on the <code>fd</code> file
