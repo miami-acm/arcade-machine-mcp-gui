@@ -5,21 +5,32 @@ repositories {
     mavenCentral()
 }
 
-mainClassName = 'mcp.McpGui'
-
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Arcade Machine MCP GUI',
-                   'Main-Class': 'mcp.McpGui'
+        attributes 'Implementation-Title': packageName,
+                   'Implementation-Version': version,
+                   'Main-Class': mainClassName
     }
+    baseName = project.name
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': packageName,
+            'Implementation-Version': version,
+            'Main-Class': mainClassName
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 dependencies {
     compile group: 'org.processing', name: 'core', version: '2.2.1'
     runtime group: 'org.processing', name: 'core', version: '2.2.1'
 
-	compile group: 'uk.co.caprica', name: 'juds', version: '0.94.1'
-	runtime group: 'uk.co.caprica', name: 'juds', version: '0.94.1'
+    compile group: 'uk.co.caprica', name: 'juds', version: '0.94.1'
+    runtime group: 'uk.co.caprica', name: 'juds', version: '0.94.1'
 }
 
 task wrapper(type: Wrapper) {
