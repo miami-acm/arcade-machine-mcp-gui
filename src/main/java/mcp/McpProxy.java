@@ -3,11 +3,13 @@ package mcp;
 import com.etsy.net.JUDS;
 import com.etsy.net.UnixDomainSocketClient;
 import java.io.*;
+import processing.core.*;
 
 public class McpProxy {
 	UnixDomainSocketClient client;
 	BufferedReader in;
 	PrintWriter out;
+	PApplet parent;
 
 	static final String GET_GAMES = "GET GAMES";
 	static final String NUM_GAMES = "NUM GAMES";
@@ -19,8 +21,9 @@ public class McpProxy {
 	 * descriptor.
 	 *
 	 * @param fd the file descriptor to listen on
+	 * @param parent the parent PApplet
 	 */
- 	public McpProxy(String fd) {
+ 	public McpProxy(PApplet parent, String fd) {
 		try {
 			client = new UnixDomainSocketClient(fd, JUDS.SOCK_STREAM);
 
@@ -31,14 +34,18 @@ public class McpProxy {
 			System.err.println("Could not connect to the socket.");
 			System.exit(1);
 		}
+
+		this.parent = parent;
 	}
 
 	/**
 	 * Construct a new McpProxy object that listens on the default file
 	 * descriptor stored in <code>DEFAULT_LOCATION</code>
+	 *
+	 * @param parent the parent PApplet
 	 */
-	public McpProxy() {
-		this(DEFAULT_LOCATION);
+	public McpProxy(PApplet parent) {
+		this(parent, DEFAULT_LOCATION);
 	}
 
 	/**
@@ -47,13 +54,17 @@ public class McpProxy {
 	 * @return array of <code>Game</code> objects
 	 */
 	public Game[] getGames() {
+		int num = numGames();
+		Game[] games = new Game[num];
+
 		out.println(GET_GAMES);
-		Game[] games = new Game[numGames()];
 
 		String line = "";
-		int i = 0;
 		try {
-			while ((line = in.readLine()).equals(DONE_GAMES)) {
+			for (int i = 0; i < num; i++) {
+				line = in.readLine();
+				games[i] = Game.fromString(parent, line);
+				System.out.println(games[i]);
 				i++;
 			}
 		} catch (IOException e) {
