@@ -17,8 +17,6 @@ public class McpGui extends PApplet {
 
 	final int SPACE_BETWEEN_LINES = 50;
 
-	final String LOC_IMG = "/home/nate/git/arcade-machine-mcp-gui/src/main/java/data/space_invaders.png";
-
 	PFont bitFont;
 
 	Game[] games;
