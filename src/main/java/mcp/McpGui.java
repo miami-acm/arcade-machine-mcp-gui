@@ -44,6 +44,11 @@ public class McpGui extends PApplet {
 	// range [0,GAMES_PER_PAGE)
 	int selection = 0;
 
+	/**
+	 * The Maximum number of games that can be shown on the current page.
+	 */
+	int maxThisPage = GAMES_PER_PAGE;
+
 	MenuState state = MenuState.LOADING;
 
 	public static void main(String[] args) {
@@ -101,6 +106,12 @@ public class McpGui extends PApplet {
 	 * HIGHLIGHT_COLOR.
 	 */
 	public void drawMenu() {
+		if (page == maxPage) {
+			maxThisPage = games.length % GAMES_PER_PAGE;
+		} else {
+			maxThisPage = GAMES_PER_PAGE;
+		}
+
 		fill(HIGHLIGHT_COLOR);
 		rect(width/2, 200, IMAGE_WIDTH+10, IMAGE_HEIGHT+10);
 
@@ -114,7 +125,7 @@ public class McpGui extends PApplet {
 		rect(hPos, vPos, BAR_WIDTH, BAR_HEIGHT);
 
 		fill(255);
-		for (int i = 0; i < GAMES_PER_PAGE; i++) {
+		for (int i = 0; i < maxThisPage; i++) {
 			vPos = 500 + i * SPACE_BETWEEN_LINES;
 
 			text(games[i * page].name, hPos, vPos);
@@ -145,7 +156,7 @@ public class McpGui extends PApplet {
 			}
 		} else if (key == 'x' || key == '2') {
 			// down on the player 1 or player 2 joystick
-			if (selection < GAMES_PER_PAGE - 1) {
+			if (selection < maxThisPage - 1) {
 				selection++;
 			}
 		} else if (anyKey.contains(key)) {
