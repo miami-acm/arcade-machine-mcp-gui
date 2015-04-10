@@ -25,8 +25,6 @@ public class Game {
 	}
 
 	public static Game fromString(PApplet parent, String line) {
-		System.out.println("parsing line");
-		System.out.println(line);
 		Matcher lineMatcher = GAME_PATTERN.matcher(line);
 
 		if (!lineMatcher.matches()) {
@@ -38,7 +36,6 @@ public class Game {
 		String image = lineMatcher.group(3);
 
 		Game g = new Game(parent, name, path, image);
-		System.out.println(g);
 		return g;
 	}
 
