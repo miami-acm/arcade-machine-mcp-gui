@@ -21,7 +21,7 @@ public class McpGui extends PApplet {
 
 	Game[] games;
 	HashSet<Character> anyKey;
-	McpProxy masterControlProgram = new McpProxy();
+	McpProxy masterControlProgram;
 
 	// This will be updated by the `loadGames` method after it executes. Since
 	// `loadGames` runs asynchronously, this will indicate to the main thread that
@@ -51,6 +51,7 @@ public class McpGui extends PApplet {
 	}
 
 	public void setup() {
+		masterControlProgram = new McpProxy(this);
 		thread("loadGames");
 		thread("loadAnyKey");
 
