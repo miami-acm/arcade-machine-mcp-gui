@@ -64,7 +64,6 @@ public class McpProxy {
 			for (int i = 0; i < num; i++) {
 				line = in.readLine();
 				games[i] = Game.fromString(parent, line);
-				System.out.println(games[i]);
 				i++;
 			}
 		} catch (IOException e) {
