@@ -1,7 +1,6 @@
 package mcp;
 
 import java.util.HashSet;
-import java.util.ArrayList;
 import processing.core.*;
 
 public class McpGui extends PApplet {
@@ -22,8 +21,9 @@ public class McpGui extends PApplet {
 
 	PFont bitFont;
 
-	ArrayList<Game> games;
+	Game[] games;
 	HashSet<Character> anyKey;
+	McpProxy masterControlProgram = new McpProxy();
 
 	// This will be updated by the `loadGames` method after it executes. Since
 	// `loadGames` runs asynchronously, this will indicate to the main thread that
@@ -105,7 +105,7 @@ public class McpGui extends PApplet {
 		fill(HIGHLIGHT_COLOR);
 		rect(width/2, 200, IMAGE_WIDTH+10, IMAGE_HEIGHT+10);
 
-		Game selectedGame = games.get(selection * page);
+		Game selectedGame = games[selection * page];
 		image(selectedGame.image, width/2, 200, IMAGE_WIDTH, IMAGE_HEIGHT);
 
 		int hPos = width / 2;
@@ -118,7 +118,7 @@ public class McpGui extends PApplet {
 		for (int i = 0; i < GAMES_PER_PAGE; i++) {
 			vPos = 500 + i * SPACE_BETWEEN_LINES;
 
-			text(games.get(i * page).name, hPos, vPos);
+			text(games[i * page].name, hPos, vPos);
 		}
 	}
 
@@ -150,7 +150,7 @@ public class McpGui extends PApplet {
 				selection++;
 			}
 		} else if (anyKey.contains(key)) {
-			Game selectedGame = games.get(selection * page);
+			Game selectedGame = games[selection * page];
 			selectedGame.run();
 		}
 	}
@@ -169,16 +169,9 @@ public class McpGui extends PApplet {
 	 * `maxPage` variable to the index of the last page.
 	 */
 	public void loadGames() {
-		games = new ArrayList<Game>();
+		games = masterControlProgram.getGames();
 
-		games.add(new Game(this, "Space Invaders", "space_invaders.pde", LOC_IMG));
-		games.add(new Game(this, "Space Invaders", "space_invaders.pde", LOC_IMG));
-		games.add(new Game(this, "Space Invaders", "space_invaders.pde", LOC_IMG));
-		games.add(new Game(this, "Space Invaders", "space_invaders.pde", LOC_IMG));
-		games.add(new Game(this, "Space Invaders", "space_invaders.pde", LOC_IMG));
-
-		maxPage = games.size() / GAMES_PER_PAGE + 1;
-
+		maxPage = games.length / GAMES_PER_PAGE + 1;
 		gamesLoaded = true;
 	}
 
