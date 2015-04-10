@@ -16,6 +16,8 @@ public class McpGui extends PApplet {
 	final int IMAGE_WIDTH = 300;
 	final int IMAGE_HEIGHT = 300;
 
+	final int SPACE_BETWEEN_LINES = 50;
+
 	final String LOC_IMG = "/home/nate/git/arcade-machine-mcp-gui/src/main/java/data/space_invaders.png";
 
 	PFont bitFont;
@@ -107,14 +109,14 @@ public class McpGui extends PApplet {
 		image(selectedGame.image, width/2, 200, IMAGE_WIDTH, IMAGE_HEIGHT);
 
 		int hPos = width / 2;
-		int vPos = 500 + selection * 100;
+		int vPos = 500 + selection * SPACE_BETWEEN_LINES;
 
 		fill(HIGHLIGHT_COLOR);
 		rect(hPos, vPos, BAR_WIDTH, BAR_HEIGHT);
 
 		fill(255);
 		for (int i = 0; i < GAMES_PER_PAGE; i++) {
-			vPos = 500 + i * 100;
+			vPos = 500 + i * SPACE_BETWEEN_LINES;
 
 			text(games.get(i * page).name, hPos, vPos);
 		}
