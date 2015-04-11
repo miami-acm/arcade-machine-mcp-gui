@@ -64,7 +64,6 @@ public class McpProxy {
 			for (int i = 0; i < num; i++) {
 				line = in.readLine();
 				games[i] = Game.fromString(parent, line);
-				i++;
 			}
 		} catch (IOException e) {
 			System.err.println("There was a problem communicating with the MCP.");
