@@ -1,6 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
+packageName = 'Arcade Machine MCP GUI'
+mainClassName = 'mcp.McpGui'
+version = '1.0.0'
+
 repositories {
     mavenCentral()
 }
