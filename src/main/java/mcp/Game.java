@@ -9,19 +9,16 @@ public class Game {
 	PImage image;
 	String path;
 	PApplet parent;
-	static final String GAME_RULE = "'([-_a-zA-Z0-9. ]+)' '([-_a-zA-Z0-9. /]+)' '([-_a-zA-Z0-9. /]+)'";
+	int id;
+	static final String GAME_RULE = "'([-_a-zA-Z0-9. ]+)' '([-_a-zA-Z0-9. /]+)' '([-_a-zA-Z0-9. /]+)' '([0-9]+)'";
 	static final Pattern GAME_PATTERN = Pattern.compile(GAME_RULE);
 
-	public Game(PApplet parent, String name, String path, String imagePath) {
+	public Game(PApplet parent, String name, String path, String imagePath, int id) {
 		this.parent = parent;
 		this.name = name;
 		this.path = path;
 		this.image = parent.loadImage(imagePath);
-	}
-
-	public void run() {
-		parent.println("Running game " + name);
-		parent.exit();
+		this.id = id;
 	}
 
 	public static Game fromString(PApplet parent, String line) {
@@ -34,8 +31,10 @@ public class Game {
 		String name = lineMatcher.group(1);
 		String path = lineMatcher.group(2);
 		String image = lineMatcher.group(3);
+		String idStr = lineMatcher.group(4);
+		int id = Integer.parseInt(idStr);
 
-		Game g = new Game(parent, name, path, image);
+		Game g = new Game(parent, name, path, image, id);
 		return g;
 	}
 

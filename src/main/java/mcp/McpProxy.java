@@ -15,6 +15,7 @@ public class McpProxy {
 	static final String NUM_GAMES = "NUM GAMES";
 	static final String DONE_GAMES = "DONE GAMES";
 	static final String DEFAULT_LOCATION = "/tmp/mcp";
+	static final String RUN_GAME = "RUN GAME ";
 
 	/**
 	 * Construct a new McpProxy object that listens on the <code>fd</code> file
@@ -93,5 +94,16 @@ public class McpProxy {
 		}
 
 		return num;
+	}
+
+	/**
+	 * Start running a game via the Master Control Program and kill this
+	 * GUI instance
+	 *
+	 * @param toStart the game to start running
+	 */
+	public void runGame(Game toStart) {
+		out.println(RUN_GAME + toStart.id);
+		parent.exit();
 	}
 }

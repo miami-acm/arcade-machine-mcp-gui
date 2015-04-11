@@ -3,6 +3,9 @@ package mcp;
 import java.util.HashSet;
 import processing.core.*;
 
+/**
+ * The main GUI class for the Master Control Program.
+ */
 public class McpGui extends PApplet {
 	final int GAMES_PER_PAGE = 5;
 
@@ -161,7 +164,7 @@ public class McpGui extends PApplet {
 			}
 		} else if (anyKey.contains(key)) {
 			Game selectedGame = games[selection * page];
-			selectedGame.run();
+			masterControlProgram.runGame(selectedGame);
 		}
 	}
 
